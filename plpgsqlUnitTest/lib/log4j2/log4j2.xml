@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration>
+<Configuration status="OFF">
+    <Properties>
+        <Property name="ptn">%d{yyyy-MM-dd HH:mm:ss.SSS} p=%-5p c=%c t=%t C=%C F=%F M=%M L=%L m=%m %n</Property>
+    </Properties>
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${ptn}" />
+        </Console>
+        <RollingFile name="file" fileName="/Applications/Eclipse_2021-06.app/Contents/workspace/plpgsqlUnitTest/log/log4j2.log"
+            filePattern="log/%d{yyyyMM}/log4j2_%d{yyyyMMdd}_%i.log">
+            <PatternLayout pattern="${ptn}" />
+            <Policies>
+                <OnStartupTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="2 MB" />
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy max="10" />
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="plpgsqlUnitTest" level="info" additivity="false">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="file" />
+        </Logger>
+    </Loggers>
+</Configuration>
